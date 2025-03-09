@@ -1,0 +1,120 @@
+/* shelf-list.component.css */
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+.filter-section {
+  background-color: #f8f9fa; /* bg-slate-100 */
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mx-2 {
+  margin: 0 10px;
+}
+
+/* Updated Styles with #1e293b */
+.table-striped tbody tr:nth-child(odd) {
+  background-color: #f8f9fa; /* Keeping original bg-slate-100 */
+}
+
+.btn-primary {
+  background-color: #1e293b; /* Updated to new main color */
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0f1419; /* Darker shade of #1e293b for hover */
+}
+
+.btn-success {
+  background-color: #1e293b; /* Updated to new main color */
+  color: white;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #0f1419; /* Darker shade of #1e293b for hover */
+}
+
+.btn-secondary {
+  background-color: #6c757d; /* Keeping original secondary color */
+  color: white;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268; /* Keeping original hover shade */
+}
+
+.btn-outline-primary {
+  background-color: transparent;
+  border: 1px solid #02172a; /* Updated to new main color */
+  color: #02172a; /* Updated to new main color */
+}
+
+.btn-outline-primary:hover {
+  background-color: #e2e8f0; /* Light slate for hover */
+}
+
+.btn-outline-primary:disabled {
+  border-color: #6c757d; /* Original disabled border */
+  color: #6c757d; /* Original disabled text */
+}
+
+.form-control {
+  padding: 0.375rem 0.75rem;
+  border: 1px solid #ced4da; /* Original border color */
+}
+
+.form-control:focus {
+  border-color: #1e293b; /* Updated to new main color */
+  outline: none;
+}
+
+.alert-success {
+  background-color: #d4edda; /* Original success bg */
+  color: #155724; /* Original success text */
+  padding: 0.75rem;
+  margin-top: 1rem;
+}
+
+.alert-danger {
+  background-color: #f8d7da; /* Original danger bg */
+  color: #721c24; /* Original danger text */
+  padding: 0.75rem;
+  margin-top: 1rem;
+}
+
+.alert-info {
+  background-color: #cce5ff; /* Original info bg */
+  color: #022c5a; /* Original info text */
+  padding: 0.75rem;
+}
+
+.form-check-inline {
+  margin-right: 15px;
+}

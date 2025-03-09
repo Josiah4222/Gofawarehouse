@@ -1,0 +1,129 @@
+/* Warehouse list container */
+.warehouse-list-container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+h2 {
+  font-size: 24px;
+  color: #03203c;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Warehouse table */
+.warehouse-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+}
+
+.warehouse-table th,
+.warehouse-table td {
+  padding: 12px;
+  text-align: left;
+  font-size: 14px;
+  border-bottom: 1px solid #ddd;
+}
+
+.warehouse-table th {
+  background-color: #03203c;
+  color: #fff;
+  font-weight: 500;
+}
+
+.warehouse-table td {
+  color: #333;
+}
+
+/* Action buttons */
+.warehouse-table button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #03203c;
+  color: #fff;
+  margin-right: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.warehouse-table button:hover {
+  background-color: #021d2f; /* Slightly darker shade of #03203c */
+}
+
+/* Uncomment and style the Delete button if needed */
+/*
+.warehouse-table button:last-child {
+  background-color: #dc3545;
+}
+.warehouse-table button:last-child:hover {
+  background-color: #c82333;
+}
+*/
+
+/* Loading indicator */
+.loading-indicator {
+  text-align: center;
+  padding: 20px;
+}
+
+.loading-indicator p {
+  font-size: 16px;
+  color: #03203c;
+  margin: 0;
+}
+
+/* Error message */
+.error-message {
+  text-align: center;
+  padding: 20px;
+}
+
+.error-message p {
+  font-size: 16px;
+  color: #dc3545;
+  margin: 0;
+}
+
+/* No warehouses message */
+.no-warehouses {
+  text-align: center;
+  padding: 20px;
+}
+
+.no-warehouses p {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .warehouse-list-container {
+    margin: 20px 10px;
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .warehouse-table th,
+  .warehouse-table td {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .warehouse-table button {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,147 @@
+/* Edit Warehouse container */
+.edit-warehouse-container {
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Heading */
+  .edit-warehouse-container h2 {
+    font-size: 24px;
+    color: #03203c;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 600;
+  }
+  
+  /* Form container */
+  .edit-warehouse-container .form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Form group (label + input) */
+  .edit-warehouse-container .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .edit-warehouse-container .form-group label {
+    font-size: 16px;
+    color: #03203c;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  
+  .edit-warehouse-container .form-group input {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #03203c;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+  }
+  
+  .edit-warehouse-container .form-group input:focus {
+    outline: none;
+    border-color: #03203c;
+    box-shadow: 0 0 5px rgba(3, 32, 60, 0.3);
+  }
+  
+  .edit-warehouse-container .form-group input::placeholder {
+    color: #999;
+  }
+  
+  /* Invalid input styling (optional, requires ngClass or similar) */
+  .edit-warehouse-container .form-group input.ng-invalid.ng-touched {
+    border-color: #dc3545;
+  }
+  
+  /* Form actions (button container) */
+  .edit-warehouse-container .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px; /* Adds space between buttons */
+    margin-top: 15px;
+  }
+  
+  /* Buttons */
+  .edit-warehouse-container .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .edit-warehouse-container .btn-primary {
+    background-color: #03203c;
+    color: #fff;
+  }
+  
+  .edit-warehouse-container .btn-primary:hover:not(:disabled) {
+    background-color: #021d2f; /* Slightly darker shade of #03203c */
+  }
+  
+  .edit-warehouse-container .btn-primary:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .edit-warehouse-container .btn-secondary {
+    background-color: #6c757d; /* Gray color for secondary buttons */
+    color: #fff;
+  }
+  
+  .edit-warehouse-container .btn-secondary:hover:not(:disabled) {
+    background-color: #5a6268; /* Slightly darker shade of #6c757d */
+  }
+  
+  /* Loading and error messages */
+  .edit-warehouse-container .loading-indicator,
+  .edit-warehouse-container .error-message {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .edit-warehouse-container .loading-indicator p {
+    color: #03203c;
+    font-size: 16px;
+  }
+  
+  .edit-warehouse-container .error-message p {
+    color: #dc3545; /* Red color for error messages */
+    font-size: 16px;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .edit-warehouse-container {
+      margin: 20px 10px;
+      padding: 20px;
+    }
+  
+    .edit-warehouse-container h2 {
+      font-size: 20px;
+    }
+  
+    .edit-warehouse-container .form-group label {
+      font-size: 14px;
+    }
+  
+    .edit-warehouse-container .form-group input {
+      font-size: 12px;
+      padding: 8px;
+    }
+  
+    .edit-warehouse-container .btn {
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+  }

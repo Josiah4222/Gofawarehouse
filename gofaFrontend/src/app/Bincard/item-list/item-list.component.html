@@ -1,0 +1,69 @@
+<div class="registered-items">
+  <h2 class="title">የተመዘገቡ እቃዎች</h2>
+
+  <!-- Search Input -->
+  <div class="search-container">
+    <input 
+      type="text" 
+      [(ngModel)]="searchQuery" 
+      (input)="filterItems()" 
+      placeholder="እቃ ይፈልጉ..." 
+      class="search-input"
+    />
+    <button (click)="clearSearch()" class="clear-btn">አጽዳ</button>
+  </div>
+
+  <!-- Filter Checkboxes -->
+  <div class="filter-container" style="display: flex; justify-content: space-around;">
+    <label *ngFor="let field of filterFields" class="checkbox-container">
+      <input 
+        type="checkbox" 
+        [(ngModel)]="searchFields[field.key]" 
+        (change)="filterItems()"
+        class="checkbox-input"
+      />
+      <span class="checkbox-label">{{ field.label }}</span>
+    </label>
+  </div>
+
+  <!-- Loading Indicator -->
+  <div *ngIf="isLoading" class="loading">በመጫን ላይ...</div>
+
+  <!-- Item List -->
+  <table class="item-table" *ngIf="filteredItems.length > 0">
+    <thead>
+      <tr>
+        <th>የእቃ ስም</th>
+        <th>ምድብ</th>
+        <th>አይነት</th>
+        <th>ሞዴል</th>
+        <th>ሴሪ ቁጥር</th>
+        <th>ሁኔታ</th>
+        <th>ሞላት</th> <!-- New Balance column -->
+        <th>ድርጊቶች</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of filteredItems">
+        <td>{{ item.name }}</td>
+        <td>{{ item.location }}</td>
+        <td>{{ item.itemType }}</td>
+        <td>{{ item.modelNumber }}</td>
+        <td>{{ item.serialNumber }}</td>
+        <td>{{ item.condition }}</td>
+        <td>{{ calculateBalance(item) }}</td> <!-- Balance display -->
+        <td class="actions">
+          <button (click)="openItemDetail(item)" class="btn btn-view">ዝርዝር</button>
+          <button (click)="openAddQuantity(item)" class="btn btn-add">ገቢ</button>
+          <button (click)="openWithdrawQuantity(item)" class="btn btn-warning">ወጪ</button>
+          <!-- <button (click)="deleteItem(item)" class="btn btn-delete">ማጥፋት</button> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- No Items Found Message -->
+  <div *ngIf="filteredItems.length === 0 && !isLoading" class="no-items">
+    ምንም ውጤት አልተገኘም።
+  </div>
+</div>

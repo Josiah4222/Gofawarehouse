@@ -1,0 +1,553 @@
+/* ✅ Registered Items Container */
+.registered-items {
+  margin: 20px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow-x: auto; /* Enables horizontal scrolling for tables */
+  max-width: 100%;
+  margin-left: 250px;
+}
+
+/* ✅ Title */
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* ✅ Search Bar */
+.search-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.search-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.clear-btn {
+  padding: 10px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #dc3545;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.clear-btn:hover {
+  background-color: #ca1628;
+}
+
+/* ✅ Table Styling */
+.item-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px; /* Ensures the table does not shrink too much */
+}
+
+.item-table th,
+.item-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap; /* Prevents text from wrapping in an ugly way */
+}
+
+.item-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+/* ✅ Centering "ድርጊቶች" Header */
+.item-table th:last-child {
+  text-align: center; /* Centers the header */
+  min-width: 180px; /* Ensures enough space for buttons */
+}
+
+/* ✅ Centering Buttons */
+.item-table td.actions {
+  text-align: center;
+}
+
+.item-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* ✅ No Items Message */
+.no-items {
+  text-align: center;
+  color: #6c757d;
+  font-size: 16px;
+}
+
+/* ✅ Registered Items Container */
+.registered-items {
+  margin: 20px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow-x: auto; /* Enables horizontal scrolling for tables */
+  max-width: 100%;
+  margin-left: 250px;
+}
+
+/* ✅ Title */
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* ✅ Search Bar */
+.search-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.search-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.clear-btn {
+  padding: 10px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #dc3545;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.clear-btn:hover {
+  background-color: #ca1628;
+}
+
+/* ✅ Table Styling */
+.item-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px; /* Ensures the table does not shrink too much */
+}
+
+.item-table th,
+.item-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap; /* Prevents text from wrapping in an ugly way */
+}
+
+.item-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+/* ✅ Centering "ድርጊቶች" Header */
+.item-table th:last-child {
+  text-align: center; /* Centers the header */
+  min-width: 180px; /* Ensures enough space for buttons */
+}
+
+/* ✅ Centering Buttons */
+.item-table td.actions {
+  text-align: center;
+}
+
+.item-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* ✅ No Items Message */
+.no-items {
+  text-align: center;
+  color: #6c757d;
+  font-size: 16px;
+}
+
+/* ✅ Checkbox Container */
+.checkbox-container {
+  display: flex;
+  align-items: center; /* Vertically align the checkbox and label */
+  gap: 12px; /* Increased gap for better spacing */
+  margin-bottom: 12px; /* Space between checkboxes */
+}
+
+/* ✅ Checkbox Label */
+.checkbox-label {
+  font-size: 16px; /* Slightly larger font size for better readability */
+  color: #333;
+  cursor: pointer; /* Ensures it looks clickable */
+  transition: color 0.2s ease-in-out; /* Smooth transition for color change */
+}
+
+/* ✅ Hover effect on label */
+.checkbox-container:hover .checkbox-label {
+  color: #03203c; /* Change label color when hovered */
+}
+
+/* ✅ Checkbox Input */
+.checkbox-input {
+  width: 20px; /* Slightly larger checkbox */
+  height: 20px;
+  cursor: pointer;
+  border: 2px solid #03203c; /* Dark border for better visibility */
+  border-radius: 4px; /* Rounded corners for a modern look */
+  background-color: white;
+  transition: all 0.3s ease; /* Smooth transition for checkbox */
+}
+
+/* ✅ Checked State */
+.checkbox-input:checked {
+  background-color: #03203c;
+  border-color: #03203c;
+}
+
+
+
+/* ✅ Focus State */
+.checkbox-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(3, 32, 60, 0.2); /* Light shadow on focus for accessibility */
+}
+
+/* ✅ Disabled State */
+.checkbox-input:disabled {
+  background-color: #f4f4f4;
+  border-color: #ddd;
+  cursor: not-allowed;
+}
+
+.checkbox-input:disabled + .checkbox-label {
+  color: #6c757d;
+  cursor: not-allowed;
+}
+
+
+/* ✅ Action Buttons */
+.actions {
+  display: flex;
+  flex-wrap: wrap; /* Ensures buttons wrap properly */
+  gap: 8px;
+  justify-content: center;
+}
+
+.actions .btn {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 14px;
+  min-width: 90px;
+}
+
+/* ✅ View Button */
+.actions .btn-view {
+  background-color: #03203c;
+  color: white;
+}
+
+.actions .btn-view:hover {
+  background-color: #02172a;
+}
+
+/* ✅ Add Button */
+.actions .btn-add {
+  background-color: #28a745;
+  color: white;
+}
+
+.actions .btn-add:hover {
+  background-color: #218838;
+}
+
+/* ✅ Withdraw Button */
+.actions .btn-warning {
+  background-color: #ffc107;
+  color: white;
+}
+
+.actions .btn-warning:hover {
+  background-color: #e0a800;
+}
+
+/* ✅ Delete Button */
+.actions .btn-delete {
+  background-color: #dc3545;
+  color: white;
+}
+
+.actions .btn-delete:hover {
+  background-color: #ca1628;
+}
+
+/* ✅ Responsive Design */
+
+/* 🖥️ Tablets & Small Laptops */
+@media screen and (max-width: 768px) {
+  .registered-items {
+    padding: 15px;
+    margin: 10px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .item-table {
+    font-size: 14px;
+    min-width: 600px;
+  }
+
+  .search-container {
+    flex-direction: column;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .actions {
+    flex-direction: column; /* Stacks buttons on smaller screens */
+    align-items: center;
+  }
+
+  .actions .btn {
+    font-size: 12px;
+    padding: 8px 10px;
+    min-width: 100%;
+  }
+}
+
+/* 📱 Mobile Phones */
+@media screen and (max-width: 480px) {
+  .registered-items {
+    padding: 10px;
+    margin: 5px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .item-table {
+    font-size: 12px;
+    min-width: 500px;
+  }
+
+  /* Allow table scrolling for small screens */
+  .registered-items {
+    overflow-x: auto;
+  }
+
+  /* Stack buttons for better usability */
+  .actions {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .actions .btn {
+    font-size: 12px;
+    padding: 6px 8px;
+    width: 100%; /* Full-width buttons for better tap area */
+  }
+
+  .search-container {
+    flex-direction: column;
+  }
+
+  .clear-btn {
+    width: 100%;
+  }
+}
+
+/* 📱 Extra Small Phones */
+@media screen and (max-width: 360px) {
+  .title {
+    font-size: 16px;
+  }
+
+  .item-table {
+    font-size: 11px;
+    min-width: 450px;
+  }
+
+  .actions .btn {
+    font-size: 11px;
+    padding: 5px 7px;
+  }
+}
+
+
+/* ✅ Action Buttons */
+.actions {
+  display: flex;
+  flex-wrap: wrap; /* Ensures buttons wrap properly */
+  gap: 8px;
+  justify-content: center;
+}
+
+.actions .btn {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 14px;
+  min-width: 90px;
+}
+
+/* ✅ View Button */
+.actions .btn-view {
+  background-color: #03203c;
+  color: white;
+}
+
+.actions .btn-view:hover {
+  background-color: #02172a;
+}
+
+/* ✅ Add Button */
+.actions .btn-add {
+  background-color: #28a745;
+  color: white;
+}
+
+.actions .btn-add:hover {
+  background-color: #218838;
+}
+
+/* ✅ Withdraw Button */
+.actions .btn-warning {
+  background-color: #ffc107;
+  color: white;
+}
+
+.actions .btn-warning:hover {
+  background-color: #e0a800;
+}
+
+/* ✅ Delete Button */
+.actions .btn-delete {
+  background-color: #dc3545;
+  color: white;
+}
+
+.actions .btn-delete:hover {
+  background-color: #ca1628;
+}
+
+/* ✅ Responsive Design */
+
+/* 🖥️ Tablets & Small Laptops */
+@media screen and (max-width: 768px) {
+  .registered-items {
+    padding: 15px;
+    margin: 10px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .item-table {
+    font-size: 14px;
+    min-width: 600px;
+  }
+
+  .search-container {
+    flex-direction: column;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .actions {
+    flex-direction: column; /* Stacks buttons on smaller screens */
+    align-items: center;
+  }
+
+  .actions .btn {
+    font-size: 12px;
+    padding: 8px 10px;
+    min-width: 100%;
+  }
+}
+
+/* 📱 Mobile Phones */
+@media screen and (max-width: 480px) {
+  .registered-items {
+    padding: 10px;
+    margin: 5px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .item-table {
+    font-size: 12px;
+    min-width: 500px;
+  }
+
+  /* Allow table scrolling for small screens */
+  .registered-items {
+    overflow-x: auto;
+  }
+
+  /* Stack buttons for better usability */
+  .actions {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .actions .btn {
+    font-size: 12px;
+    padding: 6px 8px;
+    width: 100%; /* Full-width buttons for better tap area */
+  }
+
+  .search-container {
+    flex-direction: column;
+  }
+
+  .clear-btn {
+    width: 100%;
+  }
+}
+
+/* 📱 Extra Small Phones */
+@media screen and (max-width: 360px) {
+  .title {
+    font-size: 16px;
+  }
+
+  .item-table {
+    font-size: 11px;
+    min-width: 450px;
+  }
+
+  .actions .btn {
+    font-size: 11px;
+    padding: 5px 7px;
+  }
+}

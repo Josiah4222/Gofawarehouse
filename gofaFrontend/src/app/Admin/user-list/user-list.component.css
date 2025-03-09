@@ -1,0 +1,191 @@
+/* General container styling */
+.user-list-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+}
+
+/* Heading */
+h2 {
+  font-size: 22px;
+  color: #03203c;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Search and Filter Section */
+.search-filter {
+  margin-bottom: 15px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.search-filter input,
+.search-filter select {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #03203c;
+  border-radius: 4px;
+  width: 180px;
+}
+
+.search-filter input:focus,
+.search-filter select:focus {
+  outline: none;
+  border-color: #03203c;
+}
+
+.search-filter input::placeholder {
+  color: #666;
+}
+
+/* User Table */
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+}
+
+.user-table th,
+.user-table td {
+  padding: 10px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.user-table th {
+  background-color: #03203c;
+  color: #fff;
+  font-weight: 500;
+}
+
+.user-table tr {
+  border-bottom: 1px solid #ddd;
+}
+
+/* Editable inputs in table */
+.user-table input,
+.user-table select {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #03203c;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.user-table input:focus,
+.user-table select:focus {
+  outline: none;
+  border-color: #03203c;
+}
+
+/* Action Buttons */
+.user-table button {
+  padding: 5px 10px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #03203c;
+  color: #fff;
+}
+
+.user-table button:last-child {
+  background-color: #dc3545; /* Red for delete */
+}
+
+.user-table button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  gap: 10px;
+}
+
+.pagination button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: #03203c;
+  color: #fff;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 14px;
+  color: #03203c;
+}
+
+/* Loading State */
+.loading {
+  text-align: center;
+  padding: 15px;
+}
+
+.loading p {
+  font-size: 16px;
+  color: #03203c;
+  margin: 0;
+}
+
+/* Error State */
+.error {
+  text-align: center;
+  padding: 15px;
+}
+
+.error p {
+  font-size: 16px;
+  color: #dc3545;
+  margin: 0;
+}
+
+/* No Users Found */
+.no-users {
+  text-align: center;
+  padding: 15px;
+}
+
+.no-users p {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .user-table th,
+  .user-table td {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .search-filter input,
+  .search-filter select {
+    width: 100%;
+  }
+
+  .pagination button {
+    padding: 5px 10px;
+  }
+
+  .user-table button {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}

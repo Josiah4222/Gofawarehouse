@@ -1,0 +1,83 @@
+<!-- shelf-list.component.html -->
+<div class="container">
+  <h2>Shelf List</h2>
+
+  <div class="alert alert-success mt-3" *ngIf="successMessage">{{successMessage}}</div>
+  <div class="alert alert-danger mt-3" *ngIf="errorMessage">{{errorMessage}}</div>
+
+  <!-- Filter Section -->
+  <div class="filter-section mb-3">
+    <div class="row align-items-center">
+      <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchTerm" (ngModelChange)="onFilterChange()">
+      </div>
+      <div class="col-md-4">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="filterByName" [(ngModel)]="filterByName" (ngModelChange)="onFilterChange()">
+          <label class="form-check-label" for="filterByName">Filter by Name</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="filterByWarehouse" [(ngModel)]="filterByWarehouse" (ngModelChange)="onFilterChange()">
+          <label class="form-check-label" for="filterByWarehouse">Filter by Warehouse</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <table class="table table-striped" *ngIf="filteredShelves.length > 0">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Column</th>
+        <th>Row</th>
+        <th>Warehouse</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let shelf of filteredShelves">
+        <ng-container *ngIf="editingShelfId === shelf.shelfId; else viewMode">
+          <td><input type="text" class="form-control" [(ngModel)]="editedShelf!.name"></td>
+          <td><input type="text" class="form-control" [(ngModel)]="editedShelf!.column"></td>
+          <td><input type="text" class="form-control" [(ngModel)]="editedShelf!.row"></td>
+          <td>
+            <select class="form-control" [(ngModel)]="editedShelf!.warehouse" [compareWith]="compareWarehouses">
+              <option *ngFor="let warehouse of warehouses" [ngValue]="warehouse">
+                {{warehouse.name}}
+              </option>
+            </select>
+          </td>
+          <td>
+            <button class="btn btn-success btn-sm" (click)="saveEdit()">Save</button>
+            <button class="btn btn-secondary btn-sm ml-2" (click)="cancelEdit()">Cancel</button>
+          </td>
+        </ng-container>
+        <ng-template #viewMode>
+          <td>{{shelf.name}}</td>
+          <td>{{shelf.column}}</td>
+          <td>{{shelf.row}}</td>
+          <td>{{shelf.warehouse.name}}</td>
+          <td>
+            <button class="btn btn-primary btn-sm" (click)="startEdit(shelf)">Edit</button>
+          </td>
+        </ng-template>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="alert alert-info" *ngIf="filteredShelves.length === 0 && !errorMessage">
+    No shelves found with the current filters
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="pagination mt-3" *ngIf="totalPages > 1">
+    <button class="btn btn-outline-primary btn-sm" (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">
+      Previous
+    </button>
+    <span class="mx-2">Page {{currentPage}} of {{totalPages}}</span>
+    <button class="btn btn-outline-primary btn-sm" (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">
+      Next
+    </button>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+<div class="container">
+  <h2>Register</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <!-- First Name -->
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input
+        id="firstName"
+        type="text"
+        formControlName="firstName"
+        class="form-control"
+        placeholder="Enter your first name"
+      />
+      <small *ngIf="registerForm.get('firstName')?.touched && registerForm.get('firstName')?.invalid" class="text-danger">
+        First name is required and must be at least 2 characters long.
+      </small>
+    </div>
+
+    <!-- Last Name -->
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input
+        id="lastName"
+        type="text"
+        formControlName="lastName"
+        class="form-control"
+        placeholder="Enter your last name"
+      />
+      <small *ngIf="registerForm.get('lastName')?.touched && registerForm.get('lastName')?.invalid" class="text-danger">
+        Last name is required and must be at least 2 characters long.
+      </small>
+    </div>
+
+    <!-- Username (Email) -->
+    <div class="form-group">
+      <label for="username">Email</label>
+      <input
+        id="username"
+        type="email"
+        formControlName="username"
+        class="form-control"
+        placeholder="Enter your email"
+      />
+      <small *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid" class="text-danger">
+        A valid username is required.
+      </small>
+    </div>
+
+    <!-- Password -->
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        id="password"
+        type="password"
+        formControlName="password"
+        class="form-control"
+        placeholder="Enter your password"
+      />
+      <small *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid" class="text-danger">
+        Password is required and must be at least 6 characters long.
+      </small>
+    </div>
+
+    <!-- Role -->
+    <div class="form-group">
+      <label for="role">Role</label>
+      <select id="role" formControlName="role" class="form-control">
+        <option *ngFor="let role of allowedRoles" [value]="role">{{ role }}</option>
+      </select>
+      <small *ngIf="registerForm.get('role')?.touched && registerForm.get('role')?.invalid" class="text-danger">
+        Role is required.
+      </small>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+      {{ isLoading ? 'Registering...' : 'Register' }}
+    </button>
+  </form>
+</div>

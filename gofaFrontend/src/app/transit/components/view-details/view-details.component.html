@@ -1,0 +1,144 @@
+<button class="btn btn-secondary" routerLink="/transit/received-items">
+  Back to List
+</button>
+<div class="container mt-4">
+  <div class="card shadow-sm" id="printable-card">
+    <div class="card-header bg-success text-white">
+      <h4 class="card-title mb-3">Item Details / የዕቃው ዝርዝር መረጃ</h4>
+    </div>
+    <div class="card-body">
+
+
+      <!-- Error State -->
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Item Details -->
+      <div *ngIf="item && !isLoading" class="row g-3">
+        <div class="col-md-6">
+
+          <div class="form-group">
+            <b><label>Description / የዕቃው ስም</label></b>
+            <p class="form-control-static">{{ item.description }}</p>
+          </div>
+          <div class="form-group">
+            <b><label>Supplier / የአቅራቢው ስም</label></b>
+            <p class="form-control-static">{{ item.supplier }}</p>
+          </div>
+          <div class="form-group">
+            <b><label>Item Type / የእቃው አይነት</label></b>
+            <p class="form-control-static">{{ item.itemType }}</p>
+          </div>
+          <div class="form-group">
+            <b><label>Serial Number / መለያ ቁ.</label></b>
+            <p class="form-control-static">{{ item.serialNumber }}</p>
+          </div>
+          <div class="form-group">
+            <b><label>Category / የእቃው ምድብ</label></b>
+            <p class="form-control-static">{{ item.category }}</p>
+          </div>
+
+          <!-- <div class="form-group">
+            <b><label>Quantity / ብዛት</label></b>
+            <p class="form-control-static">{{ item.quantity }}</p>
+          </div> -->
+          <div class="form-group">
+            <b><label>Amount</label></b>
+            <p class="form-control-static">{{ item.amount }}</p>
+          </div>
+          <div class="form-group">
+            <b><label>Unit Price / ያንዱ ዋጋ</label></b>
+            <p class="form-control-static">{{ item.unitOfPrice }}</p>
+          </div>
+          <div class="form-group">
+            <b><label>Unit of Measurement / መለኪያ</label></b>
+            <p class="form-control-static">{{ item.unitOfMeasurment }}</p>
+          </div>
+          <div class="form-group">
+            <b><label>Quantity / ብዛት</label></b>
+            <p class="form-control-static">{{ item.quality }}</p>
+          </div>
+          <div class="form-group">
+            <b><label>Invoice No / ኢንቮይስ ቁጥር</label></b>
+            <p class="form-control-static">{{ item.invoiceNo }}</p>
+          </div>
+
+
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <b><label>PRNO / ግ.መ.ቁ.</label></b>
+            <p class="form-control-static">{{ item.prno }}</p>
+          </div>
+          <div class="form-group">
+            <b><label>Contact Number / አድራሻ</label></b>
+            <p class="form-control-static">{{ item.contactNumber }}</p>
+          </div>
+          <div class="form-group">
+            <b><label>Number / ቁ.</label></b>
+            <p class="form-control-static">{{ item.number }}</p>
+          </div>
+          <div class="form-group">
+            <b><label>Date / ቀን</label></b>
+            <p class="form-control-static">{{ item.date | date }}</p>
+          </div>
+
+          <div class="form-group">
+            <b><label>Location / ከተማ, ቦታ</label></b>
+            <p class="form-control-static">{{ item.location }}</p>
+          </div>
+          <div class="form-group">
+            <b><label>Status / ሁኔታ</label></b>
+            <p class="form-control-static">
+              {{ item.status }}
+            </p>
+          </div>
+          <div class="form-group">
+            <b><label>Remark / መግለጫ</label></b>
+            <p class="form-control-static">{{ item.remark }}</p>
+          </div>
+          <div class="form-group">
+            <b><label>Registered By / የመዘገበው ሰው</label></b>
+            <p class="form-control-static">{{ item.registeredBy }}</p>
+          </div>
+          <div class="form-group">
+            <b><label>Checked By / የፈተሸው ሰው ስም</label></b>
+            <p class="form-control-static">{{ item.checkedByName }}</p>
+          </div>
+          <div class="form-group">
+            <b><label>Received By / የተረካቢው ስም</label></b>
+            <p class="form-control-static">{{ item.recivedByName }}</p>
+          </div>
+          <div class="form-group">
+            <b><label>Authorized By / ያጸደቀው ሰው ስም</label></b>
+            <p class="form-control-static">{{ item.authorizedByName}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-footer text-end">
+      <button *ngIf="item" class="btn btn-primary me-2" [routerLink]="['/transit/edit-item', item.model1Id]">
+        Edit
+      </button>
+      <button class="btn btn-info me-2" (click)="printDetails()">
+        Print
+      </button>
+      <button class="btn btn-secondary" routerLink="/transit/received-items">
+        Back to List
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+

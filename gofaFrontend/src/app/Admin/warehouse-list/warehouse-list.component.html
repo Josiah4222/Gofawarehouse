@@ -1,0 +1,42 @@
+<div class="warehouse-list-container">
+  <h2>Warehouses / መጋዘኖች</h2>
+
+  <!-- Loading Indicator -->
+  <div *ngIf="isLoading" class="loading-indicator">
+    <p>Loading warehouses... / መጋዘኖችን በመጫን ላይ...</p>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="error" class="error-message">
+    <p>{{ error }}</p>
+  </div>
+
+  <!-- Warehouse List -->
+  <table *ngIf="!isLoading && warehouses.length > 0" class="warehouse-table">
+    <thead>
+      <tr>
+        <th>Warehouse ID / መጋዘን መለያ</th>
+        <th>Name / ስም</th>
+        <th>Location / ቦታ</th>
+        <th>Actions / ተግባራት</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let warehouse of warehouses">
+        <td>{{ warehouse.warehouseId }}</td>
+        <td>{{ warehouse.name }}</td>
+        <td>{{ warehouse.location }}</td>
+        <td>
+          <button [routerLink]="['/admin/warehouses/edit', warehouse.warehouseId]">Edit / አርም</button>
+          <!-- Uncomment if you want Delete -->
+          <!-- <button (click)="onDelete(warehouse?.warehouseId ?? '')">Delete / አጥፋ</button> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- No Warehouses Message -->
+  <div *ngIf="!isLoading && warehouses.length === 0" class="no-warehouses">
+    <p>No warehouses found. / መጋዘኖች አልተገኙም።</p>
+  </div>
+</div>

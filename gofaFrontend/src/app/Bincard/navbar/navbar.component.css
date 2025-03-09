@@ -1,0 +1,148 @@
+/* Navbar Container */
+.navbar {
+    background-color: #03203c;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1000;
+  }
+  
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  /* Logo (Left Side) */
+  .logo h1 {
+    font-size: 24px;
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  /* Navigation Links and Logout Button (Right Side) */
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-links li {
+    margin: 0;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-links a:hover {
+    color: #f7dc6f; /* Soft yellow hover effect */
+  }
+  
+  .nav-links a.active {
+    color: #f7dc6f; /* Highlight active link */
+  }
+  
+  /* Logout Button */
+  .btn-logout {
+    background-color: #dc3545;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-logout:hover {
+    background-color: #c82333;
+  }
+  
+  /* Hide Desktop Links on Mobile */
+  .hide {
+    display: none;
+  }
+  
+  /* Hamburger Menu */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  
+  .hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Mobile Menu Overlay */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    z-index: 999;
+  }
+  
+  .mobile-menu li {
+    font-size: 18px;
+  }
+  
+  .mobile-menu a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .mobile-menu .btn-logout {
+    width: 100%; /* Full-width logout button for mobile */
+  }
+  
+  .mobile-menu.open {
+    display: flex;
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    .nav-right {
+      display: none; /* Hide desktop links on smaller screens */
+    }
+  
+    .hamburger {
+      display: flex; /* Show hamburger menu */
+    }
+  
+    .mobile-menu {
+      display: none; /* Hide mobile menu by default */
+    }
+  
+    .mobile-menu.open {
+      display: flex; /* Show mobile menu when toggled */
+    }
+  }

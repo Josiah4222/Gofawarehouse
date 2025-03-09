@@ -1,0 +1,57 @@
+<!-- Navbar Container -->
+<nav class="navbar">
+    <div class="navbar-container">
+      <!-- Logo (Left Side) -->
+      <div class="logo">
+        <p style="font-size: 20px;">የመከላከያ መገናኛና ኢንፎርሜሽን መምሪያ አቅርቦትና ስርጭት</p>
+      </div>
+  
+      <!-- Navigation Links and Logout Button (Right Side) -->
+      <div class="nav-right" [class.hide]="!navbarOpen && windowWidth <= 768">
+        <ul class="nav-links">
+          <li routerLinkActive="active">
+            <a [routerLink]="['/register-item']">መዝግብ</a>
+          </li>
+          <li routerLinkActive="active">
+            <a [routerLink]="['/item-list']">የእቃዎች ዝርልር</a>
+          </li>
+          <li routerLinkActive="active">
+            <a [routerLink]="['/add-quantity']">ገቢ</a>
+          </li>
+          <li routerLinkActive="active">
+            <a [routerLink]="['/withdraw-quantity']">አስተካክለ</a>
+          </li>
+        </ul>
+  
+        <!-- Logout Button (No Link) -->
+        <button class="btn btn-logout" (click)="logout()">ውጣት</button>
+      </div>
+  
+      <!-- Hamburger Menu (Mobile View) -->
+      <div class="hamburger" (click)="toggleNavbar()" *ngIf="windowWidth <= 768">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  
+    <!-- Mobile Menu Overlay -->
+    <ul class="mobile-menu" [class.open]="navbarOpen && windowWidth <= 768">
+      <li routerLinkActive="active">
+        <a [routerLink]="['/register-item']" (click)="closeNavbar()">መዝግብ</a>
+      </li>
+      <li routerLinkActive="active">
+        <a [routerLink]="['/item-list']" (click)="closeNavbar()">የእቃዎች ዝርልር</a>
+      </li>
+      <li routerLinkActive="active">
+        <a [routerLink]="['/add-quantity']" (click)="closeNavbar()">ገቢ</a>
+      </li>
+      <li routerLinkActive="active">
+        <a [routerLink]="['/withdraw-quantity']" (click)="closeNavbar()">አስተካክለ</a>
+      </li>
+      <!-- Logout Button in Mobile Menu -->
+      <li>
+        <button class="btn btn-logout" (click)="logout()">ውጣ</button>
+      </li>
+    </ul>
+  </nav>

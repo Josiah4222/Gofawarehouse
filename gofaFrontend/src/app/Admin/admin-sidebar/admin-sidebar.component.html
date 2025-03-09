@@ -1,0 +1,11 @@
+<div class="sidebar" [ngClass]="{ 'closed': !showSidebar }">
+    <h1>Admin Panel</h1>
+  
+    <ul>
+      <li><a routerLink="/admin/users">User List</a></li>
+      <li><a routerLink="/admin/register">Register User</a></li>
+      <li>
+        <button class="logout-btn" (click)="onLogout()">Logout</button>
+      </li>
+    </ul>
+  </div>

@@ -1,0 +1,82 @@
+<div *ngIf="isLoading" class="loading">
+  <p>Loading users...</p>
+</div>
+
+<div *ngIf="error" class="error">
+  <p>{{ error }}</p>
+</div>
+
+<div *ngIf="!isLoading" class="user-list-container">
+  <h2>Registered Users</h2>
+
+  <!-- Search by Name -->
+  <div class="search-filter">
+    <input
+      type="text"
+      [(ngModel)]="searchName"
+      placeholder="Search by name..."
+      (input)="applyFilters()"
+    />
+  </div>
+
+  <!-- Filter by Role -->
+  <div class="search-filter">
+    <select [(ngModel)]="selectedRole" (change)="applyFilters()">
+      <option value="">All Roles</option>
+      <option *ngFor="let role of availableRoles" [value]="role">{{ role }}</option>
+    </select>
+  </div>
+
+  <!-- User Table -->
+  <!-- User Table -->
+<table class="user-table">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Role</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of paginatedUsers">
+      <td>
+        <span *ngIf="!user.isEditing">{{ user.username }}</span>
+        <input *ngIf="user.isEditing" [(ngModel)]="user.username" />
+      </td>
+      <td>
+        <span *ngIf="!user.isEditing">{{ user.firstName }}</span>
+        <input *ngIf="user.isEditing" [(ngModel)]="user.firstName" />
+      </td>
+      <td>
+        <span *ngIf="!user.isEditing">{{ user.lastName }}</span>
+        <input *ngIf="user.isEditing" [(ngModel)]="user.lastName" />
+      </td>
+      <td>
+        <span *ngIf="!user.isEditing">{{ user.role }}</span>
+        <select *ngIf="user.isEditing" [(ngModel)]="user.role">
+          <option *ngFor="let role of availableRoles" [value]="role">{{ role }}</option>
+        </select>
+      </td>
+      <td>
+        <button *ngIf="!user.isEditing" (click)="startEditing(user)">Edit</button>
+        <button *ngIf="user.isEditing" (click)="saveUser(user)">Save</button>
+        <button *ngIf="user.isEditing" (click)="cancelEditing(user)">Cancel</button>
+        <button (click)="deleteUser(user)" style="background-color: red; color: white;">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+  <!-- Pagination -->
+  <div class="pagination">
+    <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+</div>
+
+<div *ngIf="!isLoading && users.length === 0" class="no-users">
+  <p>No users found.</p>
+</div>

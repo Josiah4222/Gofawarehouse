@@ -1,0 +1,57 @@
+<div class="edit-warehouse-container">
+  <h2>Edit Warehouse / መጋዘን አርም</h2>
+
+  <!-- Loading Indicator -->
+  <div *ngIf="isLoading" class="loading-indicator">
+    <p>Loading warehouse details... / መጋዘን ዝርዝሮችን በመጫን ላይ...</p>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <!-- Edit Form -->
+  <form (ngSubmit)="onSubmit()" *ngIf="!isLoading" class="form-container">
+    <div class="form-group">
+      <label for="warehouseId">Warehouse ID / መጋዘን መለያ:</label>
+      <input
+        id="warehouseId"
+        type="text"
+        [(ngModel)]="warehouse.warehouseId"
+        name="warehouseId"
+        required
+        readonly 
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="name">Name / ስም:</label>
+      <input
+        id="name"
+        type="text"
+        [(ngModel)]="warehouse.name"
+        name="name"
+        required
+        placeholder="Enter name / ስም አስገባ"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="location">Location / ቦታ:</label>
+      <input
+        id="location"
+        type="text"
+        [(ngModel)]="warehouse.location"
+        name="location"
+        required
+        placeholder="Enter location / ቦታ �ስገባ"
+      />
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-secondary" (click)="onCancel()" [disabled]="isLoading">Cancel / ይቅር</button>
+      <button type="submit" class="btn btn-primary" [disabled]="isLoading">Save Changes / ለውጦችን አስቀምጥ</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,76 @@
+<!-- shelf-registration.component.html -->
+<div class="container">
+    <h2>Register New Shelf</h2>
+  
+    <form [formGroup]="shelfForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Shelf Name:</label>
+        <input 
+          id="name"
+          type="text" 
+          class="form-control" 
+          formControlName="name"
+          [class.is-invalid]="shelfForm.get('name')?.invalid && shelfForm.get('name')?.touched">
+        <div class="invalid-feedback" *ngIf="shelfForm.get('name')?.hasError('required')">
+          Shelf name is required
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="column">Column:</label>
+        <input 
+          id="column"
+          type="text" 
+          class="form-control" 
+          formControlName="column"
+          [class.is-invalid]="shelfForm.get('column')?.invalid && shelfForm.get('column')?.touched">
+        <div class="invalid-feedback" *ngIf="shelfForm.get('column')?.hasError('required')">
+          Column is required
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="row">Row:</label>
+        <input 
+          id="row"
+          type="text" 
+          class="form-control" 
+          formControlName="row"
+          [class.is-invalid]="shelfForm.get('row')?.invalid && shelfForm.get('row')?.touched">
+        <div class="invalid-feedback" *ngIf="shelfForm.get('row')?.hasError('required')">
+          Row is required
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="warehouseName">Warehouse:</label>
+        <select 
+          id="warehouseName"
+          class="form-control" 
+          formControlName="warehouseName"
+          [class.is-invalid]="shelfForm.get('warehouseName')?.invalid && shelfForm.get('warehouseName')?.touched">
+          <option value="">Select a warehouse</option>
+          <option *ngFor="let warehouse of warehouses" [value]="warehouse.name">
+            {{warehouse.name}}
+          </option>
+        </select>
+        <div class="invalid-feedback" *ngIf="shelfForm.get('warehouseName')?.hasError('required')">
+          Warehouse is required
+        </div>
+      </div>
+  
+      <button 
+        type="submit" 
+        class="btn btn-primary" 
+        [disabled]="shelfForm.invalid">
+        Register Shelf
+      </button>
+    </form>
+  
+    <div class="alert alert-success mt-3" *ngIf="successMessage">
+      {{successMessage}}
+    </div>
+    <div class="alert alert-danger mt-3" *ngIf="errorMessage">
+      {{errorMessage}}
+    </div>
+  </div>

@@ -1,0 +1,209 @@
+<div class="container">
+  <h2>Register New Item</h2>
+
+  <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+    <!-- Name and Serial Number -->
+    <div class="row">
+      <div class="col">
+        <label for="name">Name:</label>
+        <input
+          id="name"
+          type="text"
+          class="form-control"
+          formControlName="name"
+          [class.is-invalid]="itemForm.get('name')?.invalid && itemForm.get('name')?.touched"
+        />
+        <div class="invalid-feedback" *ngIf="itemForm.get('name')?.hasError('required')">
+          Name is required.
+        </div>
+      </div>
+
+      <div class="col">
+        <label for="serialNumber">Serial Number:</label>
+        <input
+          id="serialNumber"
+          type="text"
+          class="form-control"
+          formControlName="serialNumber"
+          [class.is-invalid]="itemForm.get('serialNumber')?.invalid && itemForm.get('serialNumber')?.touched"
+        />
+        <div class="invalid-feedback" *ngIf="itemForm.get('serialNumber')?.hasError('required')">
+          Serial number is required.
+        </div>
+      </div>
+    </div>
+
+    <!-- Description and Warehouse -->
+    <div class="row">
+      <div class="col">
+        <label for="description">Description:</label>
+        <textarea
+          id="description"
+          class="form-control"
+          formControlName="description"
+        ></textarea>
+      </div>
+
+      <div class="col">
+        <label for="warehouseId">Warehouse:</label>
+        <select
+          id="warehouseId"
+          class="form-control"
+          formControlName="warehouseId"
+          (change)="onWarehouseChange(itemForm.get('warehouseId')?.value)"
+          [class.is-invalid]="itemForm.get('warehouseId')?.invalid && itemForm.get('warehouseId')?.touched"
+        >
+          <option value="">Select a warehouse</option>
+          <option *ngFor="let warehouse of warehouses" [value]="warehouse.warehouseId">
+            {{ warehouse.name }} ({{ warehouse.location }})
+          </option>
+        </select>
+        <div class="invalid-feedback" *ngIf="itemForm.get('warehouseId')?.hasError('required')">
+          Warehouse is required.
+        </div>
+      </div>
+    </div>
+
+    <!-- Shelf -->
+    <div class="row">
+      <div class="col">
+        <label for="shelfId">Shelf:</label>
+        <select
+          id="shelfId"
+          class="form-control"
+          formControlName="shelfId"
+          [class.is-invalid]="itemForm.get('shelfId')?.invalid && itemForm.get('shelfId')?.touched"
+        >
+          <option value="">Select a shelf</option>
+          <option *ngFor="let shelf of filteredShelves" [value]="shelf.shelfId">
+            {{ shelf.name }} ({{ shelf.warehouse.name }})
+          </option>
+        </select>
+        <div class="invalid-feedback" *ngIf="itemForm.get('shelfId')?.hasError('required')">
+          Shelf is required.
+        </div>
+      </div>
+    </div>
+
+    <!-- Condition and Quantity -->
+    <div class="row">
+      <div class="col">
+        <label for="condition">Condition:</label>
+        <input
+          id="condition"
+          type="text"
+          class="form-control"
+          formControlName="condition"
+          [class.is-invalid]="itemForm.get('condition')?.invalid && itemForm.get('condition')?.touched"
+        />
+        <div class="invalid-feedback" *ngIf="itemForm.get('condition')?.hasError('required')">
+          Condition is required.
+        </div>
+      </div>
+
+      <div class="col">
+        <label for="quantity">Quantity:</label>
+        <input
+          id="quantity"
+          type="number"
+          class="form-control"
+          formControlName="quantity"
+          [class.is-invalid]="itemForm.get('quantity')?.invalid && itemForm.get('quantity')?.touched"
+        />
+        <div class="invalid-feedback" *ngIf="itemForm.get('quantity')?.hasError('required')">
+          Quantity is required.
+        </div>
+        <div class="invalid-feedback" *ngIf="itemForm.get('quantity')?.hasError('min')">
+          Quantity must be at least 1.
+        </div>
+      </div>
+    </div>
+
+    <!-- Number of Boxes and Registered By -->
+    <div class="row">
+      <div class="col">
+        <label for="numOfBox">Number of Boxes:</label>
+        <input
+          id="numOfBox"
+          type="number"
+          class="form-control"
+          formControlName="numOfBox"
+          [class.is-invalid]="itemForm.get('numOfBox')?.invalid && itemForm.get('numOfBox')?.touched"
+        />
+        <div class="invalid-feedback" *ngIf="itemForm.get('numOfBox')?.hasError('required')">
+          Number of boxes is required.
+        </div>
+        <div class="invalid-feedback" *ngIf="itemForm.get('numOfBox')?.hasError('min')">
+          Number of boxes must be at least 1.
+        </div>
+      </div>
+
+      <div class="col">
+        <label for="registeredBy">Registered By:</label>
+        <input
+          id="registeredBy"
+          type="text"
+          class="form-control"
+          formControlName="registeredBy"
+          [class.is-invalid]="itemForm.get('registeredBy')?.invalid && itemForm.get('registeredBy')?.touched"
+        />
+        <div class="invalid-feedback" *ngIf="itemForm.get('registeredBy')?.hasError('required')">
+          Registered by is required.
+        </div>
+      </div>
+    </div>
+
+    <!-- Item Type and Voucher Number -->
+    <div class="row">
+      <div class="col">
+        <label for="itemType">Item Type:</label>
+        <input
+          id="itemType"
+          type="text"
+          class="form-control"
+          formControlName="itemType"
+          [class.is-invalid]="itemForm.get('itemType')?.invalid && itemForm.get('itemType')?.touched"
+        />
+        <div class="invalid-feedback" *ngIf="itemForm.get('itemType')?.hasError('required')">
+          Item type is required.
+        </div>
+      </div>
+
+      <div class="col">
+        <label for="voucherNumber">Voucher Number:</label>
+        <input
+          id="voucherNumber"
+          type="text"
+          class="form-control"
+          formControlName="voucherNumber"
+        />
+      </div>
+    </div>
+
+    <!-- Received From -->
+    <div class="row">
+      <div class="col">
+        <label for="receivedFrom">Received From:</label>
+        <input
+          id="receivedFrom"
+          type="text"
+          class="form-control"
+          formControlName="receivedFrom"
+        />
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="row mt-3">
+      <div class="col">
+        <button type="submit" class="btn btn-primary w-100" >
+          Register Item
+        </button>
+      </div>
+    </div>
+
+    <!-- Success/Error Messages -->
+    <div class="alert alert-success mt-3" *ngIf="successMessage">{{ successMessage }}</div>
+    <div class="alert alert-danger mt-3" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </form>
+</div>

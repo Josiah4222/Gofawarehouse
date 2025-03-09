@@ -1,0 +1,74 @@
+<div class="add-item-quantity-container">
+  <h3>የግብአት መዝግብ / Add Item Record</h3>
+  <form (ngSubmit)="onSubmit()" class="form-container">
+    <!-- From Whom Received / ከማን እንደተቀበለ -->
+    <div class="form-group">
+      <label for="comaAnedeTeqebale">
+        ከማን እንደተቀበለ / From Whom Received
+      </label>
+      <input
+        id="comaAnedeTeqebale"
+        type="text"
+        class="form-control"
+        [(ngModel)]="itemDetails.comaAnedeTeqebale"
+        name="comaAnedeTeqebale"
+        required
+        placeholder="ከማን እንደተቀበለ / From Whom Received"
+      />
+    </div>
+
+    <!-- Quantity Received / የገቢ ብዛት -->
+    <div class="form-group">
+      <label for="yegibiBzatt">
+        የገቢ ብዛት / Quantity Received
+      </label>
+      <input
+        id="yegibiBzatt"
+        type="number"
+        class="form-control"
+        [(ngModel)]="itemDetails.yegibiBzat"
+        name="yegibiBzat"
+        required
+        placeholder="የገቢ ብዛት / Quantity Received"
+      />
+    </div>
+
+    <!-- Registered By / የመዘገበው -->
+    <div class="form-group">
+      <label for="ymezegebew">
+        የመዘገበው / Registered By
+      </label>
+      <input
+        id="ymezegebew"
+        type="text"
+        class="form-control"
+        [(ngModel)]="itemDetails.ymezegebew"
+        name="ymezegebew"
+        required
+        placeholder="የመዘገበው / Registered By"
+      />
+    </div>
+
+    <!-- Receipt Date / የቀበል ቀን -->
+    <div class="form-group">
+      <label for="receiptDate">
+        የቀበል ቀን / Receipt Date
+      </label>
+      <input
+        id="receiptDate"
+        type="date"
+        class="form-control"
+        [(ngModel)]="itemDetails.receiptDate"
+        name="receiptDate"
+        required
+        placeholder="የቀበል ቀን / Receipt Date"
+      />
+    </div>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">መዝግብ / Save</button>
+      <button type="button" class="btn btn-cancel" (click)="cancel()">ተመለስ / Cancel</button>
+    </div>
+  </form>
+</div>

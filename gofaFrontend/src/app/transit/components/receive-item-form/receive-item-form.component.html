@@ -1,0 +1,133 @@
+<div class="container">
+  <button class="btn btn-secondary" routerLink="/transit/received-items">
+  Back to List
+  </button>
+  <form [formGroup]="receiveForm" (ngSubmit)="onSubmit()" class="container mt-4">
+    <div class="card shadow-sm ">
+      <div class="card-header bg-success text-white">
+        <h4 class="card-title text-center mb-3">Receive Item Form / የዕቃ መረከቢያ ሰነድ</h4>
+      </div>
+
+
+      <div class="card-body p-4">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Supplier / የአቅራቢው ስም</label>
+              <input formControlName="supplier" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Category / የእቃው ምድብ ኮድ</label>
+              <input formControlName="category" class="form-control" />
+            </div>
+            <!-- <div class="form-group">
+              <label>Model1Id</label>
+              <input formControlName="model1Id" class="form-control" />
+            </div> -->
+            <div class="form-group">
+              <label>PRNO / ግ.መ.ቁ.</label>
+              <input formControlName="prno" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Date / ቀን</label>
+              <input formControlName="date" class="form-control" type="date" />
+            </div>
+            <div class="form-group">
+              <label>Invoice No / ኢንቮይስ ቁጥር</label>
+              <input formControlName="invoiceNo" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Item Type /  የእቃው አይነት</label>
+              <input formControlName="itemType" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Contact Number / አድራሻ</label>
+              <input formControlName="contactNumber" class="form-control" />
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Number / ቁ.</label>
+              <input formControlName="number" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Registered By / የመዘገበው ሰው</label>
+              <input formControlName="registeredBy" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Serial Number / መለያ ቁ.</label>
+              <input formControlName="serialNumber" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Description / የዕቃው ስም</label>
+              <input formControlName="description" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Unit of Measurement / መለኪያ</label>
+              <input formControlName="unitOfMeasurment" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Quantity</label>
+              <input formControlName="quality" class="form-control" />
+            </div>
+            <!-- <div class="form-group">
+              <label>UnitOfPrice / ያንዱ ዋጋ</label>
+              <input formControlName="UnitOfPrice" class="form-control" />
+            </div> -->
+            <div class="form-group">
+              <label>Unit Price / ያንዱ ዋጋ</label>
+              <input formControlName="unitOfPrice" class="form-control" />
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Amount</label>
+              <input formControlName="amount" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Location / ከተማ, ቦታ</label>
+              <input formControlName="location" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Remark / መግለጫ</label>
+              <input formControlName="remark" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group">
+            <b><label>Status</label></b>
+            <select formControlName="status" class="form-select">
+              <option value="Pending Inspection">Pending Inspection</option>
+              <option value="Approved">Approved</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Checked By / የፈተሸው ሰው ስም</label>
+              <input formControlName="checkedByName" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Received By / የተረካቢው ስም</label>
+              <input formControlName="recivedByName" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Authorized By / ያጸደቀው ሰው ስም</label>
+              <input formControlName="authorizedByName" class="form-control" />
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-3">
+          <button type="submit" class="btn btn-primary px-4 me-2" [disabled]="receiveForm.invalid">
+            Submit
+          </button>
+          <button class="btn btn-secondary" routerLink="/transit/received-items">
+            Back to List
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

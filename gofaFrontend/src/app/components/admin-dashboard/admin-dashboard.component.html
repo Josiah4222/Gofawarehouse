@@ -1,0 +1,23 @@
+<div class="dashboard-container">
+  <h1>Admin Dashboard</h1>
+
+  <div class="stats-container">
+    <div class="stat-card" (click)="navigateToUsers()">
+      <h2>Total Users</h2>
+      <p>{{ totalUsers }}</p>
+      <span class="stat-icon">👤</span>
+    </div>
+
+    <div class="stat-card" (click)="navigateToWarehouses()">
+      <h2>Total Warehouses</h2>
+      <p>{{ totalWarehouses }}</p>
+      <span class="stat-icon">🏭</span>
+    </div>
+
+    <div class="stat-card" (click)="navigateToShelves()">
+      <h2>Total Shelves</h2>
+      <p>{{ totalShelves }}</p>
+      <span class="stat-icon">📦</span>
+    </div>
+  </div>
+</div>
