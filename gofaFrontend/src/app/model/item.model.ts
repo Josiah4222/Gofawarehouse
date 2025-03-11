@@ -3,7 +3,6 @@ export interface Item {
   name: string;
   serialNumber: string;
   description?: string;
-  location: string;
   voucherNumber?: string;
   receivedFrom?: string;
   condition: string;
@@ -11,5 +10,15 @@ export interface Item {
   numOfBox: number;
   registeredBy: string;
   itemType: string;
-  shelfId: string;
+  shelfName?: string;
+}
+
+export interface Transaction {
+  transactionId?: number;
+  itemId: number;
+  oldQuantity: number;
+  newQuantity: number;
+  changeType: 'ADD' | 'WITHDRAW';
+  changedBy: string;
+  changeDate: Date;
 }

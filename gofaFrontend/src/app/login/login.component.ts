@@ -78,6 +78,10 @@ export class LoginComponent {
       case 'Transit':
         this.router.navigate(['/transit/received-items']);
         break;
+
+        case 'Manager':
+        this.router.navigate(['/MasterCard/mastercard-list']);
+        break;
       default:
         this.router.navigate(['/default-dashboard']); // Default route
     }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ItemService } from '../../services/item-service.service';
+import { Item } from '../../model/item.model';
 
 @Component({
   selector: 'app-item-list',
@@ -7,64 +9,56 @@ import { Router } from '@angular/router';
   styleUrls: ['./item-list.component.css']
 })
 export class ItemListComponent implements OnInit {
-  registeredItems: any[] = [];
-  filteredItems: any[] = [];
+  registeredItems: Item[] = [];
+  filteredItems: Item[] = [];
   isLoading = true;
-  searchQuery = ''; // Search query variable
+  searchQuery = '';
 
-  // Fields available for filtering
   filterFields = [
-    { key: 'modelNumber', label: 'በሞዴል ቁጥር' },
+    { key: 'name', label: 'በእቃው ስም' },
+    { key: 'shelfName', label: 'በምድብ' },
+    { key: 'itemType', label: 'በእቃው አይነት' },
+    { key: 'description', label: 'በሞዴል ቁጥር' },
     { key: 'serialNumber', label: 'ሴሪያል ቁጥር' },
-    { key: 'condition', label: 'በሁኔታ' },
-    { key: 'itemName', label: 'በእቃው ስም' },
-    { key: 'itemCategory', label: 'በእቃው ምድብ' },
-    { key: 'itemType', label: 'በእቃው አይነት' }
+    { key: 'condition', label: 'በሁኔታ' }
   ];
 
-  // Selected filter fields
   searchFields: { [key: string]: boolean } = {
-    modelNumber: false,
+    name: false,
+    shelfName: false,
+    itemType: false,
+    description: false,
     serialNumber: false,
-    condition: false,
-    itemName: false,
-    itemCategory: false,
-    itemType: false
+    condition: false
   };
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private itemService: ItemService
+  ) {}
 
   ngOnInit() {
     this.fetchItems();
   }
 
-  /**
-   * Fetches all registered items from localStorage.
-   */
   fetchItems(): void {
     this.isLoading = true;
-    const storedItems = localStorage.getItem('registeredItems'); // Fetch from registeredItems
-    if (storedItems) {
-      this.registeredItems = JSON.parse(storedItems);
-      this.registeredItems.forEach(item => {
-        // Initialize missing quantity fields
-        item.quantity = item.quantity || 0;
-        item.addedQuantity = item.addedQuantity || 0;
-        item.withdrawnQuantity = item.withdrawnQuantity || 0;
-      });
-      this.filteredItems = [...this.registeredItems]; // Initialize filtered items
-    } else {
-      this.registeredItems = [];
-      this.filteredItems = [];
-    }
-    this.isLoading = false;
+    this.itemService.getItems().subscribe({
+      next: (items) => {
+        this.registeredItems = items;
+        this.filteredItems = [...this.registeredItems];
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error fetching items:', error);
+        this.isLoading = false;
+      }
+    });
   }
-  /**
-   * Filters the item list based on the search query and selected checkboxes.
-   */
+
   filterItems(): void {
     if (!this.searchQuery.trim()) {
-      this.filteredItems = [...this.registeredItems]; // Reset if search is empty
+      this.filteredItems = [...this.registeredItems];
       return;
     }
 
@@ -73,73 +67,55 @@ export class ItemListComponent implements OnInit {
     );
 
     if (selectedFields.length === 0) {
-      this.filteredItems = [...this.registeredItems]; // Reset if no checkboxes are selected
+      this.filteredItems = [...this.registeredItems];
       return;
     }
 
     this.filteredItems = this.registeredItems.filter((item) =>
       selectedFields.some((field) =>
-        item[field]?.toString().toLowerCase().includes(this.searchQuery.toLowerCase())
+        item[field as keyof Item]?.toString().toLowerCase().includes(this.searchQuery.toLowerCase())
       )
     );
   }
 
-  /**
-   * Opens the item detail page for the selected item.
-   */
-  openItemDetail(item: any): void {
-    this.router.navigate(['/item-detail', item.itemCode], { state: { item } });
+  openItemDetail(item: Item): void {
+    this.router.navigate(['/item-detail', item.itemId], { state: { item } });
   }
 
-  /**
-   * Opens the add quantity form for the selected item.
-   */
-  openAddQuantity(item: any): void {
-    this.router.navigate(['/add-quantity', item.itemCode], { state: { item } });
+  openAddQuantity(item: Item): void {
+    this.router.navigate(['/add-quantity', item.itemId], { state: { item } });
   }
 
-  /**
-   * Opens the withdraw quantity form for the selected item.
-   */
-  openWithdrawQuantity(item: any): void {
-    this.router.navigate(['/withdraw-quantity', item.itemCode], { state: { item } });
+  openWithdrawQuantity(item: Item): void {
+    this.router.navigate(['/withdraw-quantity', item.itemId], { state: { item } });
   }
 
-  /**
-   * Deletes the selected item.
-   */
-  deleteItem(item: any): void {
-    if (confirm(`እርግጠኛ እንደገና ይህ "${item.itemName}" እቃ መሰረት እንደሚሰራ እውነት ነው?`)) {
-      const storedItems = localStorage.getItem('registeredItems');
-      if (storedItems) {
-        const items = JSON.parse(storedItems);
-        const updatedItems = items.filter((i: { itemCode: any }) => i.itemCode !== item.itemCode);
-        localStorage.setItem('registeredItems', JSON.stringify(updatedItems));
-        this.fetchItems(); // Refresh the list after deletion
-      }
+  deleteItem(item: Item): void {
+    if (confirm(`እርግጠኛ እንደሆኑ ይህን "${item.name}" እቃ መሰረት ይፈልጋሉ?`)) {
+      this.itemService.deleteItem(item.itemId!).subscribe({
+        next: () => {
+          this.registeredItems = this.registeredItems.filter(i => i.itemId !== item.itemId);
+          this.filterItems();
+        },
+        error: (error) => console.error('Error deleting item:', error)
+      });
     }
   }
 
-  /**
-   * Clears the search query and resets the filter.
-   */
   clearSearch(): void {
-    this.searchQuery = ''; // Clear the search query
+    this.searchQuery = '';
     this.searchFields = {
-      modelNumber: false,
+      name: false,
+      shelfName: false,
+      itemType: false,
+      description: false,
       serialNumber: false,
-      condition: false,
-      itemName: false,
-      itemCategory: false,
-      itemType: false
-    }; // Reset selected checkboxes
-    this.filterItems(); // Reset the filter
+      condition: false
+    };
+    this.filterItems();
   }
 
-  /**
-   * Calculate the balance for an item.
-   */
-  calculateBalance(item: any): number {
-    return item.quantity + item.addedQuantity - item.withdrawnQuantity;
+  calculateBalance(item: Item): number {
+    return item.quantity; // For now, just use initial quantity
   }
 }

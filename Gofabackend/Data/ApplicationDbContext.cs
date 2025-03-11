@@ -19,6 +19,8 @@ namespace Gofabackend.Data
         public DbSet<ItemType> ItemType { get; set; }
         public DbSet<Model1> Model1 { get; set; }
         public DbSet<Shelf> Shelves { get; set; }
+                public DbSet<MasterCard> MasterCard { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

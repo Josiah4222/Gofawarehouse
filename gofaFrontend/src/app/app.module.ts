@@ -40,6 +40,11 @@ import { EditItemComponent } from './transit/components/edit-item/edit-item.comp
 import { TSidebarComponent } from './transit/sidebar/sidebarr.component';
 import { AdminSidebarComponent } from './Admin/admin-sidebar/admin-sidebar.component';
 import { ShelfRegistrationComponent } from './Admin/shelf-registration/shelf-registration.component';
+import { MastercardDetailsComponent } from './Mastercard/components/mastercard-details/mastercard-details.component';
+import { MastercardEditComponent } from './Mastercard/components/mastercard-edit/mastercard-edit.component';
+import { MasterCardFormComponent } from './Mastercard/components/mastercard-form/mastercard-form.component';
+import { MastercardListComponent } from './Mastercard/components/mastercard-list/mastercard-list.component';
+import { MSidebarComponent } from './Mastercard/sidebar/sidebarr.component';
 
 
 
@@ -76,8 +81,14 @@ import { ShelfRegistrationComponent } from './Admin/shelf-registration/shelf-reg
     UserListComponent,
     EditItemComponent,
     TSidebarComponent,
+    MSidebarComponent,
     AdminSidebarComponent,
     ShelfRegistrationComponent,
+
+    MasterCardFormComponent,
+    MastercardListComponent,
+    MastercardDetailsComponent,
+    MastercardEditComponent,
     
     
     

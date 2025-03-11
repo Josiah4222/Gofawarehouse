@@ -17,7 +17,7 @@ import { ShelfListComponent } from './Admin/shelf-list/shelf-list.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './Admin/register/register.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
-import { authGuard } from './guards/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { EditWarehouseComponent } from './Admin/edit-warehouse/edit-warehouse.component'; // Import the EditWarehouseComponent
 import { UserListComponent } from './Admin/user-list/user-list.component';
 import { EditItemComponent } from './transit/components/edit-item/edit-item.component';
@@ -26,6 +26,10 @@ import { ViewDetailsComponent } from './transit/components/view-details/view-det
 import { TransitComponent } from './transit/transit.component';
 import { SidebarComponent } from './Bincard/sidebar/sidebar.component';
 import { ShelfRegistrationComponent } from './Admin/shelf-registration/shelf-registration.component';
+import { MastercardListComponent } from './Mastercard/components/mastercard-list/mastercard-list.component';
+import { MastercardDetailsComponent } from './Mastercard/components/mastercard-details/mastercard-details.component';
+import { MastercardEditComponent } from './Mastercard/components/mastercard-edit/mastercard-edit.component';
+import { MasterCardFormComponent } from './Mastercard/components/mastercard-form/mastercard-form.component';
 
 
 const routes: Routes = [
@@ -33,7 +37,7 @@ const routes: Routes = [
     component: ItemRegistrationBinComponent,
     },// Registration page
   { path: 'items', component: ItemListComponent }, // Registered items page
-  { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [authGuard] },
+  { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard] },
   { path: 'add-quantity/:itemCode', component: AddItemQuantityComponent }, // New route for AddItemQuantity
   { path: 'withdraw-quantity/:itemCode', component: WithdrawItemQuantityComponent },
   { path: 'admin/warehouse', component: WarehouseComponent }, // Warehouse registration
@@ -47,7 +51,7 @@ const routes: Routes = [
   {
     path: 'admin-dashboard',
     component: AdminDashboardComponent,
-    canActivate: [authGuard], // Apply the guard to this route
+    canActivate: [AuthGuard], // Apply the guard to this route
     data: { role: 'Admin' }, // Optionally specify required role
   },
   { path: 'admin/users', component: UserListComponent },
@@ -62,6 +66,11 @@ const routes: Routes = [
   {path: 'transit/view-details/:id', component: ViewDetailsComponent },
 
   { path: 'transit/model19-list', component: Model19ListComponent },
+  {path: 'MasterCard/mastercard-list', component: MastercardListComponent },
+  { path: 'MasterCard/mastercard-form', component: MasterCardFormComponent },
+  { path: 'MasterCard/mastercard-details/:id', component: MastercardDetailsComponent },
+  { path: 'MasterCard/mastercard-edit/:id', component: MastercardEditComponent },
+
   
 ];
 

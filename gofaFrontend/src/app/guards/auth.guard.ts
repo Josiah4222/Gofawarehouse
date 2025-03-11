@@ -1,24 +1,26 @@
-import { inject, Injectable } from '@angular/core';
-import { CanActivateFn, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { Injectable } from '@angular/core';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service'; // Import your AuthService
 
-export const authGuard: CanActivateFn = (next: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-  const authService = inject(AuthService);
-  const router = inject(Router);
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuard implements CanActivate {
+  constructor(private authService: AuthService, private router: Router) {}
 
-  if (!authService.isAuthenticated()) {
-    router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
-    return false;
-  }
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    const requiredRole = route.data['role'] as string; // Get the required role from the route data
+    const userRoles = this.authService.getCurrentUserRoles(); // Get the current user's roles
 
-  const requiredRoles = next.data['roles'] as Array<string>;
-  if (requiredRoles && requiredRoles.length > 0) {
-    const hasRole = requiredRoles.some((role) => authService.hasRole(role));
-    if (!hasRole) {
-      router.navigate(['/unauthorized']);
+    if (this.authService.isAuthenticated() && (!requiredRole || userRoles.includes(requiredRole))) {
+      return true; // Allow access if the user is authenticated and has the required role
+    } else {
+      this.router.navigate(['/login']); // Redirect to login if the user is not authenticated or doesn't have the required role
       return false;
     }
   }
-
-  return true;
-};
+}

@@ -143,6 +143,8 @@ export class AuthService {
     }
   }
 
+
+
   /**
    * Decodes the JWT token manually.
    * @param token The JWT token to decode.
@@ -173,6 +175,19 @@ export class AuthService {
     } catch (error) {
       console.error('Error decoding token:', error);
       return null;
+    }
+  }
+
+  getCurrentUserRoles(): string[] {
+    const token = localStorage.getItem('token');
+    if (!token) return [];
+  
+    try {
+      const decodedToken = this.decodeToken(token);
+      return decodedToken.role || []; // Return the roles array or an empty array if no roles exist
+    } catch (error) {
+      console.error('Error getting user roles:', error);
+      return [];
     }
   }
 

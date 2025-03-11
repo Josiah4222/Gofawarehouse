@@ -17,7 +17,6 @@
           Name is required.
         </div>
       </div>
-
       <div class="col">
         <label for="serialNumber">Serial Number:</label>
         <input
@@ -33,7 +32,7 @@
       </div>
     </div>
 
-    <!-- Description and Warehouse -->
+    <!-- Description -->
     <div class="row">
       <div class="col">
         <label for="description">Description:</label>
@@ -43,45 +42,18 @@
           formControlName="description"
         ></textarea>
       </div>
-
-      <div class="col">
-        <label for="warehouseId">Warehouse:</label>
-        <select
-          id="warehouseId"
-          class="form-control"
-          formControlName="warehouseId"
-          (change)="onWarehouseChange(itemForm.get('warehouseId')?.value)"
-          [class.is-invalid]="itemForm.get('warehouseId')?.invalid && itemForm.get('warehouseId')?.touched"
-        >
-          <option value="">Select a warehouse</option>
-          <option *ngFor="let warehouse of warehouses" [value]="warehouse.warehouseId">
-            {{ warehouse.name }} ({{ warehouse.location }})
-          </option>
-        </select>
-        <div class="invalid-feedback" *ngIf="itemForm.get('warehouseId')?.hasError('required')">
-          Warehouse is required.
-        </div>
-      </div>
     </div>
 
-    <!-- Shelf -->
+    <!-- Shelf Name -->
     <div class="row">
       <div class="col">
-        <label for="shelfId">Shelf:</label>
-        <select
-          id="shelfId"
+        <label for="shelfName">Shelf Name:</label>
+        <input
+          id="shelfName"
+          type="text"
           class="form-control"
-          formControlName="shelfId"
-          [class.is-invalid]="itemForm.get('shelfId')?.invalid && itemForm.get('shelfId')?.touched"
-        >
-          <option value="">Select a shelf</option>
-          <option *ngFor="let shelf of filteredShelves" [value]="shelf.shelfId">
-            {{ shelf.name }} ({{ shelf.warehouse.name }})
-          </option>
-        </select>
-        <div class="invalid-feedback" *ngIf="itemForm.get('shelfId')?.hasError('required')">
-          Shelf is required.
-        </div>
+          formControlName="shelfName"
+        />
       </div>
     </div>
 
@@ -100,7 +72,6 @@
           Condition is required.
         </div>
       </div>
-
       <div class="col">
         <label for="quantity">Quantity:</label>
         <input
@@ -137,7 +108,6 @@
           Number of boxes must be at least 1.
         </div>
       </div>
-
       <div class="col">
         <label for="registeredBy">Registered By:</label>
         <input
@@ -168,7 +138,6 @@
           Item type is required.
         </div>
       </div>
-
       <div class="col">
         <label for="voucherNumber">Voucher Number:</label>
         <input
@@ -196,9 +165,7 @@
     <!-- Submit Button -->
     <div class="row mt-3">
       <div class="col">
-        <button type="submit" class="btn btn-primary w-100" >
-          Register Item
-        </button>
+        <button type="submit" class="btn btn-primary w-100">Register Item</button>
       </div>
     </div>
 

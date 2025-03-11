@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ItemService } from '../../services/item-service.service';
+import { Item } from '../../model/item.model';
 
 @Component({
   selector: 'app-withdraw-item-quantity',
@@ -7,88 +10,73 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./withdraw-item-quantity.component.css']
 })
 export class WithdrawItemQuantityComponent implements OnInit {
-  item: any = {};
-  withdrawalDetails = {
-    withdrawnQuantity: 0, // Quantity to withdraw
-    recipient: '', // Recipient information
-    boxCount: 0, // Number of boxes
-    withdrawalDate: '' // Date of withdrawal
-  };
-
-  isSubmitting = false; // Add a loading state
+  item: Item | undefined;
+  withdrawForm: FormGroup;
+  isSubmitting = false;
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router
-  ) {}
-
-  ngOnInit() {
-    // Retrieve the item from the route state
-    this.item = history.state.item || {};
-    this.withdrawalDetails.withdrawalDate = new Date().toISOString().split('T')[0]; // Set default date to today
+    private router: Router,
+    private fb: FormBuilder,
+    private itemService: ItemService
+  ) {
+    this.withdrawForm = this.fb.group({
+      withdrawnQuantity: [0, [Validators.required, Validators.min(1)]],
+      recipient: ['', Validators.required],
+      boxCount: [0, [Validators.required, Validators.min(0)]],
+      withdrawalDate: [new Date().toISOString().split('T')[0], Validators.required]
+    });
   }
 
-  onSubmit() {
-    if (
-      this.withdrawalDetails.withdrawnQuantity <= 0 ||
-      !this.withdrawalDetails.recipient ||
-      this.withdrawalDetails.boxCount < 0 ||
-      !this.withdrawalDetails.withdrawalDate
-    ) {
-      alert('እባክዎን የተ纛ሮነው አይነት ቅጠል ተጫዋል.');
+  ngOnInit(): void {
+    const itemId = Number(this.route.snapshot.paramMap.get('id'));
+    this.item = history.state.item;
+    if (!this.item) {
+      this.itemService.getItemById(itemId).subscribe({
+        next: (item) => this.item = item,
+        error: (error) => console.error('Error fetching item:', error)
+      });
+    }
+  }
+
+  onSubmit(): void {
+    if (this.withdrawForm.invalid || !this.item) {
+      this.withdrawForm.markAllAsTouched();
       return;
     }
 
+    this.isSubmitting = true;
+    const { withdrawnQuantity, recipient, boxCount, withdrawalDate } = this.withdrawForm.value;
     const currentQuantity = this.item.quantity || 0;
 
-    // Ensure the user cannot withdraw more than the available quantity
-    if (this.withdrawalDetails.withdrawnQuantity > currentQuantity) {
-      alert('የአስተካክለብት ብዛት የተገበረው ብዛት ምላሽ ነው።');
+    if (withdrawnQuantity > currentQuantity) {
+      alert('የሚወጣው ብዛት ከአሁኑ ብዛት መብለጥ አይችልም።');
+      this.isSubmitting = false;
       return;
     }
 
-    // Calculate the updated quantity after withdrawal
-    const updatedQuantity = currentQuantity - this.withdrawalDetails.withdrawnQuantity;
+    const updatedQuantity = currentQuantity - withdrawnQuantity;
+    const updatedDescription = `${this.item.description || ''} | Withdrawn on ${withdrawalDate}: ${recipient}, Boxes: ${boxCount}`;
 
-    // Create a new transaction entry for the withdrawal
-    const transactionEntry = {
-      date: this.withdrawalDetails.withdrawalDate, // Use the specified withdrawal date
-      action: 'withdraw', // Action type
-      quantity: this.withdrawalDetails.withdrawnQuantity, // Quantity withdrawn
-      details: `Recipient: ${this.withdrawalDetails.recipient}, Boxes: ${this.withdrawalDetails.boxCount}`
-    };
-
-    // Update the existing item with the new details and total quantity
-    const updatedItem = {
+    const updatedItem: Item = {
       ...this.item,
-      quantity: updatedQuantity, // Set the updated quantity
-      transactionHistory: [
-        ...(this.item.transactionHistory || []), // Preserve existing history
-        transactionEntry // Add the new transaction
-      ]
+      quantity: updatedQuantity,
+      description: updatedDescription // Temporary until transaction table is added
     };
 
-    this.isSubmitting = true; // Set loading state
-
-    // Update the item in localStorage
-    this.updateItemInLocalStorage(updatedItem);
-
-    this.isSubmitting = false; // Reset loading state
-    this.router.navigate(['/items']); // Navigate back to the item list page
+    this.itemService.updateItem(this.item.itemId!, updatedItem).subscribe({
+      next: () => {
+        this.isSubmitting = false;
+        this.router.navigate(['/registered-items']);
+      },
+      error: (error) => {
+        console.error('Error withdrawing quantity:', error);
+        this.isSubmitting = false;
+      }
+    });
   }
 
-  updateItemInLocalStorage(updatedItem: any) {
-    const storedItems = localStorage.getItem('registeredItems');
-    if (storedItems) {
-      const items = JSON.parse(storedItems);
-      const updatedItems = items.map((item: { itemCode: any; }) =>
-        item.itemCode === updatedItem.itemCode ? updatedItem : item
-      );
-      localStorage.setItem('registeredItems', JSON.stringify(updatedItems));
-    }
-  }
-
-  cancel() {
-    this.router.navigate(['/items']);
+  cancel(): void {
+    this.router.navigate(['/registered-items']);
   }
 }

@@ -35,10 +35,6 @@ namespace Gofabackend.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -61,7 +57,7 @@ namespace Gofabackend.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ShelfId")
+                    b.Property<string>("ShelfName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -70,8 +66,6 @@ namespace Gofabackend.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("ItemId");
-
-                    b.HasIndex("ShelfId");
 
                     b.ToTable("Items");
                 });
@@ -93,6 +87,126 @@ namespace Gofabackend.Migrations
                     b.HasKey("ItemTypeId");
 
                     b.ToTable("ItemType");
+                });
+
+            modelBuilder.Entity("Gofabackend.Models.MasterCard", b =>
+                {
+                    b.Property<int>("MasterCardId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ABC")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("AvgUsage")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Consigning")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("InCHAb")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("InStock")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Issued")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LeadTime")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MaxLevel")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Model")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ORG")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("OrderNo")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("OrderTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PartNumber")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Postedby")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("QYT")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("QYTOrder")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Received")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RecordPoint")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SSL")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UM")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UnitPack")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UnitPrice")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("VED")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("VoucherNo")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("MasterCardId");
+
+                    b.ToTable("MasterCard");
                 });
 
             modelBuilder.Entity("Gofabackend.Models.Model1", b =>
@@ -211,37 +325,37 @@ namespace Gofabackend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bd669fd3-0c9c-45b0-9a4a-013b10115088",
+                            Id = "369af6c4-7807-4f72-b1e0-513368000873",
                             Name = "VHF",
                             NormalizedName = "VHF"
                         },
                         new
                         {
-                            Id = "d0aff79c-fbe1-45d8-85b4-dfe10c57c0d4",
+                            Id = "c6a1b5ee-3606-4882-871d-f69d3dedd6da",
                             Name = "HF",
                             NormalizedName = "HF"
                         },
                         new
                         {
-                            Id = "216ffc34-7a16-4b8d-b7ab-dab0d377f57d",
+                            Id = "11704799-5678-4f7a-be99-cff132a7991f",
                             Name = "Transit",
                             NormalizedName = "TRANSIT"
                         },
                         new
                         {
-                            Id = "b25b9b05-4059-4197-a669-71685eb3ce2c",
+                            Id = "4b6f3e83-abe6-414a-802b-987aa36ca220",
                             Name = "Sparepart",
                             NormalizedName = "SPAREPART"
                         },
                         new
                         {
-                            Id = "1591a1f2-ab03-44d6-99ac-c934c1018d57",
+                            Id = "ad708a37-8e0b-43be-8cc1-19fd24225a38",
                             Name = "Electronics",
                             NormalizedName = "ELECTRONICS"
                         },
                         new
                         {
-                            Id = "45623c3c-1e36-4e0b-bd31-566f58cabe89",
+                            Id = "e594f141-e176-4471-88d6-df593d318a36",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         });
@@ -467,17 +581,6 @@ namespace Gofabackend.Migrations
                     b.HasIndex("WarehouseId");
 
                     b.ToTable("Shelf");
-                });
-
-            modelBuilder.Entity("Gofabackend.Data.Item", b =>
-                {
-                    b.HasOne("Shelf", "Shelf")
-                        .WithMany()
-                        .HasForeignKey("ShelfId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Shelf");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

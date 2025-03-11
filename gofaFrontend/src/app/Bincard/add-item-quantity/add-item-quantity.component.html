@@ -1,74 +1,73 @@
-<div class="add-item-quantity-container">
-  <h3>የግብአት መዝግብ / Add Item Record</h3>
-  <form (ngSubmit)="onSubmit()" class="form-container">
-    <!-- From Whom Received / ከማን እንደተቀበለ -->
+<div class="container">
+  <h2>ገቢ መጨመር</h2>
+  <p>እቃ: {{ item?.name }}</p>
+  <p>የአሁኑ ብዛት: {{ item?.quantity }}</p>
+
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="comaAnedeTeqebale">
-        ከማን እንደተቀበለ / From Whom Received
-      </label>
+      <label for="comaAnedeTeqebale">ኮማ አንዴ ተቀባለ:</label>
       <input
         id="comaAnedeTeqebale"
         type="text"
         class="form-control"
-        [(ngModel)]="itemDetails.comaAnedeTeqebale"
-        name="comaAnedeTeqebale"
-        required
-        placeholder="ከማን እንደተቀበለ / From Whom Received"
+        formControlName="comaAnedeTeqebale"
+        [class.is-invalid]="addForm.get('comaAnedeTeqebale')?.invalid && addForm.get('comaAnedeTeqebale')?.touched"
       />
+      <div class="invalid-feedback" *ngIf="addForm.get('comaAnedeTeqebale')?.hasError('required')">
+        ይህ መስክ ያስፈልጋል።
+      </div>
     </div>
 
-    <!-- Quantity Received / የገቢ ብዛት -->
     <div class="form-group">
-      <label for="yegibiBzatt">
-        የገቢ ብዛት / Quantity Received
-      </label>
+      <label for="yegibiBzat">የገቢ ብዛት:</label>
       <input
-        id="yegibiBzatt"
+        id="yegibiBzat"
         type="number"
         class="form-control"
-        [(ngModel)]="itemDetails.yegibiBzat"
-        name="yegibiBzat"
-        required
-        placeholder="የገቢ ብዛት / Quantity Received"
+        formControlName="yegibiBzat"
+        [class.is-invalid]="addForm.get('yegibiBzat')?.invalid && addForm.get('yegibiBzat')?.touched"
       />
+      <div class="invalid-feedback" *ngIf="addForm.get('yegibiBzat')?.hasError('required')">
+        ብዛት ያስፈልጋል።
+      </div>
+      <div class="invalid-feedback" *ngIf="addForm.get('yegibiBzat')?.hasError('min')">
+        ብዛት ቢያንስ 1 መሆን አለበት።
+      </div>
     </div>
 
-    <!-- Registered By / የመዘገበው -->
     <div class="form-group">
-      <label for="ymezegebew">
-        የመዘገበው / Registered By
-      </label>
+      <label for="ymezegebew">የመዘጋበው:</label>
       <input
         id="ymezegebew"
         type="text"
         class="form-control"
-        [(ngModel)]="itemDetails.ymezegebew"
-        name="ymezegebew"
-        required
-        placeholder="የመዘገበው / Registered By"
+        formControlName="ymezegebew"
+        [class.is-invalid]="addForm.get('ymezegebew')?.invalid && addForm.get('ymezegebew')?.touched"
       />
+      <div class="invalid-feedback" *ngIf="addForm.get('ymezegebew')?.hasError('required')">
+        ይህ መስክ ያስፈልጋል።
+      </div>
     </div>
 
-    <!-- Receipt Date / የቀበል ቀን -->
     <div class="form-group">
-      <label for="receiptDate">
-        የቀበል ቀን / Receipt Date
-      </label>
+      <label for="receiptDate">የተቀበለበት ቀን:</label>
       <input
         id="receiptDate"
         type="date"
         class="form-control"
-        [(ngModel)]="itemDetails.receiptDate"
-        name="receiptDate"
-        required
-        placeholder="የቀበል ቀን / Receipt Date"
+        formControlName="receiptDate"
+        [class.is-invalid]="addForm.get('receiptDate')?.invalid && addForm.get('receiptDate')?.touched"
       />
+      <div class="invalid-feedback" *ngIf="addForm.get('receiptDate')?.hasError('required')">
+        ቀን ያስፈልጋል።
+      </div>
     </div>
 
-    <!-- Form Actions -->
-    <div class="form-actions">
-      <button type="submit" class="btn btn-primary">መዝግብ / Save</button>
-      <button type="button" class="btn btn-cancel" (click)="cancel()">ተመለስ / Cancel</button>
-    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="addForm.invalid || isSubmitting">
+      {{ isSubmitting ? 'በመጨመር ላይ...' : 'ጨምር' }}
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="cancel()" [disabled]="isSubmitting">
+      መሰረት
+    </button>
   </form>
 </div>

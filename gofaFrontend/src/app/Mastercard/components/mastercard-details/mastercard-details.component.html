@@ -1,0 +1,74 @@
+<div class="content-container">
+  <button class="btn btn-secondary" routerLink="/MasterCard/mastercard-list">
+    Back to List
+  </button>
+  <div class="container mt-4">
+    <div class="card shadow-sm" id="printable-card">
+      <div class="card-header bg-success text-white">
+        <h4 class="card-title mb-3">Master Card Details / የአዝማድ ዝርዝር መረጃ</h4>
+      </div>
+      <div class="card-body">
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          {{ errorMessage }}
+        </div>
+
+        <div *ngIf="item && !isLoading" class="row g-3">
+          <div class="col-md-6">
+            <div class="form-group"><b>Model:</b> {{ item?.model }}</div>
+            <div class="form-group"><b>Part Number:</b> {{ item?.partNumber }}</div>
+            <div class="form-group"><b>Description:</b> {{ item?.description }}</div>
+            <div class="form-group"><b>U/M:</b> {{ item?.um }}</div>
+            <div class="form-group"><b>In.CH.Ab:</b> {{ item?.inCHAb }}</div>
+            <div class="form-group"><b>Unit Pack:</b> {{ item?.unitPack }}</div>
+            <div class="form-group"><b>Lead Time:</b> {{ item?.leadTime }}</div>
+            <div class="form-group"><b>Avg Usage:</b> {{ item?.avgUsage }}</div>
+            <div class="form-group"><b>S.S.L:</b> {{ item?.ssl }}</div>
+            <div class="form-group"><b>Max Level:</b> {{ item?.maxLevel }}</div>
+            <div class="form-group"><b>Record Point:</b> {{ item?.recordPoint }}</div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group"><b>VED:</b> {{ item?.ved }}</div>
+            <div class="form-group"><b>ABC:</b> {{ item?.abc }}</div>
+            <div class="form-group"><b>Status:</b> {{ item?.status }}</div>
+            <div class="form-group"><b>Order Time:</b> {{ item?.orderTime | date }}</div>
+            <div class="form-group"><b>Location:</b> {{ item?.location }}</div>
+            <div class="form-group"><b>Order No:</b> {{ item?.orderNo }}</div>
+            <div class="form-group"><b>Consigning:</b> {{ item?.consigning }}</div>
+            <div class="form-group"><b>QYT Order:</b> {{ item?.qytOrder }}</div>
+            <div class="form-group"><b>QYT:</b> {{ item?.qyt }}</div>
+          </div>
+        </div>
+
+        <h5 class="mt-4">Transaction Details</h5>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="form-group"><b>Date:</b> {{ item?.date | date }}</div>
+            <div class="form-group"><b>Voucher No:</b> {{ item?.voucherNo }}</div>
+            <div class="form-group"><b>Received:</b> {{ item?.received }}</div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group"><b>Issued:</b> {{ item?.issued }}</div>
+            <div class="form-group"><b>In Stock:</b> {{ item?.inStock }}</div>
+            <div class="form-group"><b>Unit Price:</b> {{ item?.unitPrice }}</div>
+            <div class="form-group"><b>ORG:</b> {{ item?.org }}</div>
+            <div class="form-group"><b>Posted By:</b> {{ item?.postedBy }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer text-end">
+        <button *ngIf="item" class="btn btn-primary me-2" [routerLink]="['/MasterCard/mastercard-edit', item.masterCardId]">
+          Edit
+        </button>
+        <button class="btn btn-info me-2" (click)="printDetails()">
+          Print
+        </button>
+        <button class="btn btn-secondary" routerLink="/MasterCard/mastercard-list">
+          Back to List
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+</div>

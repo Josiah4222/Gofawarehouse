@@ -25,9 +25,7 @@ namespace Gofabackend.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<Item>>> GetItems()
         {
-            return await _context.Items
-                .Include(i => i.Shelf) // Include related Shelf only
-                .ToListAsync();
+            return await _context.Items.ToListAsync(); // Removed .Include(i => i.Shelf)
         }
 
         // GET: api/items/{id}
@@ -35,8 +33,7 @@ namespace Gofabackend.Controllers
         public async Task<ActionResult<Item>> GetItem(int id)
         {
             var item = await _context.Items
-                .Include(i => i.Shelf)
-                .FirstOrDefaultAsync(i => i.ItemId == id);
+                .FirstOrDefaultAsync(i => i.ItemId == id); // Removed .Include(i => i.Shelf)
 
             if (item == null)
             {
@@ -52,7 +49,7 @@ namespace Gofabackend.Controllers
         {
             if (item == null)
             {
-                return BadRequest();
+                return BadRequest("Item cannot be null.");
             }
 
             _context.Items.Add(item);

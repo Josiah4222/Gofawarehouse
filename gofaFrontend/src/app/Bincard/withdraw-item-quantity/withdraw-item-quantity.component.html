@@ -1,78 +1,76 @@
-<div class="withdraw-item-quantity-container">
-  <h3>የወጪ ገጽ / Withdrawal Page</h3>
-  <form (ngSubmit)="onSubmit()" class="form-container">
+<div class="container">
+  <h2>ወጪ መቀነስ</h2>
+  <p>እቃ: {{ item?.name }}</p>
+  <p>የአሁኑ ብዛት: {{ item?.quantity }}</p>
 
-
+  <form [formGroup]="withdrawForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="recipient">
-        ለማን እንድስጠ / Recipient
-      </label>
-      <input
-        id="recipient"
-        type="text"
-        class="form-control"
-        [(ngModel)]="withdrawalDetails.recipient"
-        name="recipient"
-        required
-        placeholder="ለማን እንድስጠ / Recipient"
-      />
-    </div>
-
-
-    <!-- Withdrawn Quantity / የወጪ ብዛት -->
-    <div class="form-group">
-      <label for="withdrawnQuantity">
-        የወጪ ብዛት / Withdrawn Quantity
-      </label>
+      <label for="withdrawnQuantity">የሚወጣው ብዛት:</label>
       <input
         id="withdrawnQuantity"
         type="number"
         class="form-control"
-        [(ngModel)]="withdrawalDetails.withdrawnQuantity"
-        name="withdrawnQuantity"
-        required
-        placeholder="የወጪ ብዛት / Withdrawn Quantity"
+        formControlName="withdrawnQuantity"
+        [class.is-invalid]="withdrawForm.get('withdrawnQuantity')?.invalid && withdrawForm.get('withdrawnQuantity')?.touched"
       />
+      <div class="invalid-feedback" *ngIf="withdrawForm.get('withdrawnQuantity')?.hasError('required')">
+        ብዛት ያስፈልጋል።
+      </div>
+      <div class="invalid-feedback" *ngIf="withdrawForm.get('withdrawnQuantity')?.hasError('min')">
+        ብዛት ቢያንስ 1 መሆን አለበት።
+      </div>
     </div>
 
-    <!-- Recipient / ለማን እንድስጠ -->
-    
-
-    <!-- Box Count / የሳጥን ብዛት -->
     <div class="form-group">
-      <label for="boxCount">
-        የሳጥን ብዛት / Box Count
-      </label>
+      <label for="recipient">ተቀባይ:</label>
+      <input
+        id="recipient"
+        type="text"
+        class="form-control"
+        formControlName="recipient"
+        [class.is-invalid]="withdrawForm.get('recipient')?.invalid && withdrawForm.get('recipient')?.touched"
+      />
+      <div class="invalid-feedback" *ngIf="withdrawForm.get('recipient')?.hasError('required')">
+        ተቀባይ ያስፈልጋል።
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="boxCount">የቦክስ ብዛት:</label>
       <input
         id="boxCount"
         type="number"
         class="form-control"
-        [(ngModel)]="withdrawalDetails.boxCount"
-        name="boxCount"
-        required
-        placeholder="የሳጥን ብዛት / Box Count"
+        formControlName="boxCount"
+        [class.is-invalid]="withdrawForm.get('boxCount')?.invalid && withdrawForm.get('boxCount')?.touched"
       />
+      <div class="invalid-feedback" *ngIf="withdrawForm.get('boxCount')?.hasError('required')">
+        የቦክስ ብዛት ያስፈልጋል።
+      </div>
+      <div class="invalid-feedback" *ngIf="withdrawForm.get('boxCount')?.hasError('min')">
+        የቦክስ ብዛት ከ0 በታች መሆን አይችልም።
+      </div>
     </div>
 
-    <!-- Withdrawal Date / የምርት ዘመን -->
     <div class="form-group">
-      <label for="withdrawalDate">
-        የወጣበት ቀን / Withdrawal Date
-      </label>
+      <label for="withdrawalDate">የወጣበት ቀን:</label>
       <input
         id="withdrawalDate"
         type="date"
         class="form-control"
-        [(ngModel)]="withdrawalDetails.withdrawalDate"
-        name="withdrawalDate"
-        required
+        formControlName="withdrawalDate"
+        [class.is-invalid]="withdrawForm.get('withdrawalDate')?.invalid && withdrawForm.get('withdrawalDate')?.touched"
       />
+      <div class="invalid-feedback" *ngIf="withdrawForm.get('withdrawalDate')?.hasError('required')">
+        ቀን ያስፈልጋል።
+      </div>
     </div>
 
-    <!-- Form Actions -->
-    <div class="form-actions">
-      <button type="submit" class="btn btn-primary">መዝግብ / Save</button>
-      <button type="button" class="btn btn-cancel" (click)="cancel()">ተመለስ / Cancel</button>
-    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="withdrawForm.invalid || isSubmitting">
+      {{ isSubmitting ? 'በመቀነስ ላይ...' : 'ቀንስ' }}
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="cancel()" [disabled]="isSubmitting">
+      መሰረት
+    </button>
   </form>
 </div>
